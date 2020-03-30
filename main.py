@@ -383,8 +383,15 @@ def minmaxpro(arr, min=True):
     
 
 # using the function correctly
-print("min:", minmaxpro(rnums))
-print("max:", minmaxpro(rnums, False))
+try:
+    print("min:", minmaxpro(rnums))
+except ValueError as e:
+    print(e)
+
+try:
+    print("max:", minmaxpro(rnums, False))
+except ValueError as e:
+    print(e)
 
 # now try it with a non-numpy array
 a = [10,20,30] # this is a Python List, not a Numpy array
