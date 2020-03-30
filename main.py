@@ -332,7 +332,7 @@ print()
 ########################################################
 
 """
-In the fucntion above, we can make a small change so that the minimum is
+In the function above, we can make a small change so that the minimum is
 assumed, and then we can override it to the max if we choose. This is
 done with a default value for min.
 """
@@ -352,4 +352,52 @@ def min_max2(arr, min=True):
 # to the flag if want to change the default value
 print("min:", min_max2(rnums))
 print("max:", min_max2(rnums, False))
+print()
+
+########################################################
+# PROFESSIONAL CODING
+########################################################
+"""
+In the fucntions above there is no error checking for passed in values.
+This would not be acceptable in ANY professional code. It is ALWAYS
+your responsibility to check for errors in data and data types.
+This demonstrates a complete, professional version of the min_max function.
+This will also demonstrate the correct usage of the Try/Except statement.
+"""
+
+def minmaxpro(arr, min=True):
+
+    if type(arr) != type(np.empty(0, dtype="int")):
+        raise ValueError('array must be a Numpy integer array')
+    elif type(min) != bool:
+        raise ValueError('parameter min must be Boolean')
+    else:
+        l = len(arr)
+        minmax = arr[0] # priming read to get a start value
+        for i in range(1, l):
+            if(min):
+                if arr[i] > minmax: minmax = arr[i]
+            else:
+                if arr[i] < minmax: minmax = arr[i]
+        return minmax
+    
+
+# using the function correctly
+print("min:", minmaxpro(rnums))
+print("max:", minmaxpro(rnums, False))
+
+# now try it with a non-numpy array
+a = [10,20,30] # this is a Python List, not a Numpy array
+try:
+    print("min:", minmaxpro(a))
+except ValueError as e:
+    print(e)
+
+# now try it with a float instead of a boolean for min
+n = 1.234
+try:
+    print("min:", minmaxpro(rnums, n)) # n is a float, not a boolen
+except ValueError as e:
+    print(e)
+
 print()
