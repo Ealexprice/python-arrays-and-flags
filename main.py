@@ -368,9 +368,9 @@ This will also demonstrate the correct usage of the Try/Except statement.
 def minmaxpro(arr, min=True):
 
     if type(arr) != type(np.empty(0, dtype="int")):
-        raise ValueError('array must be a Numpy integer array')
+        raise TypeError('array must be a Numpy integer array')
     elif type(min) != bool:
-        raise ValueError('parameter min must be Boolean')
+        raise TypeError('parameter min must be Boolean')
     else:
         l = len(arr)
         minmax = arr[0] # priming read to get a start value
@@ -385,26 +385,26 @@ def minmaxpro(arr, min=True):
 # using the function correctly
 try:
     print("min:", minmaxpro(rnums))
-except ValueError as e:
+except TypeError as e:
     print(e)
 
 try:
     print("max:", minmaxpro(rnums, False))
-except ValueError as e:
+except TypeError as e:
     print(e)
 
 # now try it with a non-numpy array
 a = [10,20,30] # this is a Python List, not a Numpy array
 try:
     print("min:", minmaxpro(a))
-except ValueError as e:
+except TypeError as e:
     print(e)
 
 # now try it with a float instead of a boolean for min
 n = 1.234
 try:
     print("min:", minmaxpro(rnums, n)) # n is a float, not a boolen
-except ValueError as e:
+except TypeError as e:
     print(e)
 
 print()
